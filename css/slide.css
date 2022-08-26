@@ -1,0 +1,33 @@
+.pages {
+    display: flex;
+    width: 400%;
+    box-sizing: border-box;
+}
+
+.page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.7s;
+    color: white;
+}
+
+.one {
+    background: #738BFA;
+}
+
+.two {
+    background-color: dodgerblue;
+}
+
+.three {
+    background-color: indigo;
+}
+
+.four {
+    background-color: limegreen;
+}
