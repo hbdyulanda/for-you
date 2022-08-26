@@ -36,7 +36,7 @@
             transform: scale(1.05);
         }
 
-        p {
+        .poem{
             font-size: 1.5rem;
             font-family: 'Caveat', cursive;
         }
@@ -49,7 +49,7 @@
 
         .pages {
             display: flex;
-            width: 400%;
+            width: 700%;
             box-sizing: border-box;
         }
 
@@ -80,6 +80,18 @@
         .four {
             background-color: limegreen;
         }
+
+        .five {
+            background-color: limegreen;
+        }
+
+        .six {
+            background-color: limegreen;
+        }
+
+        .seven {
+            background-color: limegreen;
+        }
     </style>
 </head>
 
@@ -91,13 +103,12 @@
     <div class="container">
         <div class="pages">
             <div class="page one">
-                <h3>Hi!</h3><br>
                 <div>
                     <button onClick="slide('next'); playAudio()">Click Me</button>
                 </div>
             </div>
             <div class="page two">
-                <h3>For</h3>
+                <p>For</p>
                 <p>Yulanda Gusminar on her 20th birthday</p><br>
                 <div>
                     <button onClick="slide('next')">Next</button>
@@ -105,25 +116,25 @@
             </div>
             <div class="page three">
                 <div>
-                    <p>
+                    <p class="poem">
                         Instead of counting candles,<br>
                         or tallying the years,<br>
                         contemplate your blessings now,<br>
                         as your birthday nears.<br><br>
                     </p>
-                    <p>
+                    <p class="poem">
                         Consider special people<br>
                         who love you, and who care,<br>
                         and others who've enriched your life<br>
                         just by being there.<br><br>
                     </p>
-                    <p>
+                    <p class="poem">
                         Think about memories<br>
                         passing years can never mar,<br>
                         experiences great and small<br>
                         that have made you who you are.<br><br>
                     </p>
-                    <p>
+                    <p class="poem">
                         Another year is a happy gift,<br>
                         so cut your cake, and say,<br>
                         "Instead of counting birthdays,<br>
@@ -136,6 +147,24 @@
             </div>
             <div class="page four">
                 <h1>PAGE 4</h1>
+                <div>
+                    <button onClick="slide('next')">Next</button>
+                </div>
+            </div>
+            <div class="page five">
+                <h1>PAGE 5</h1>
+                <div>
+                    <button onClick="slide('next')">Next</button>
+                </div>
+            </div>
+            <div class="page six">
+                <h1>PAGE 6</h1>
+                <div>
+                    <button onClick="slide('next')">Next</button>
+                </div>
+            </div>
+            <div class="page seven">
+                <h1>PAGE 7</h1>
                 <div>
                     <button onClick="slide('prev')">Previous</button>
                 </div>
