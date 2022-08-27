@@ -57,6 +57,7 @@
 
         .poem {
             font-size: 1.2rem;
+            font-weight: 550;
             font-family: 'Amatic SC', cursive !important;
         }
 
@@ -135,22 +136,22 @@
                     <button onClick="slide('next')">Click Me</button>
                 </div>
             </div>
-            <div class="page two">
+            <div class="page two" style="text-align: center;">
                 <p>It may not be very impressive,
                     <br>but hope you like it.
                 </p>
                 <div>
-                    <button onClick="slide('next'); playAudio(); confetti()">Next</button>
+                    <button onClick="slide('next'); playAudio(); confetti()">Okay</button>
                 </div>
             </div>
             <div class="page three">
                 <h1 style="font-family: 'Pacifico', cursive !important; text-align: center;">HAPPY<br>BIRTHDAY</h1>
                 <div>
-                    <button onClick="slide('next')">Next</button>
+                    <button onClick="slide('next')">Yay</button>
                 </div>
             </div>
             <div class="page four">
-                <p class="poem" style="font-size: 1.5rem;">For Yulanda Gusminar
+                <p class="poem" style="font-size: 1.5rem; font-weight: 550; text-align: center;">For Yulanda Gusminar
                     <br>on her 20th birthday
                 </p><br>
                 <div>
@@ -167,6 +168,7 @@
                     </p>
                 </div>
                 <div>
+                    <button onClick="slide('prev')">Previous</button>
                     <button onClick="slide('next')">Next</button>
                 </div>
             </div>
@@ -181,6 +183,7 @@
                 </div>
 
                 <div>
+                    <button onClick="slide('prev')">Previous</button>
                     <button onClick="slide('next')">Next</button>
                 </div>
             </div>
@@ -214,11 +217,12 @@
                 </div>
             </div>
             <div class="page nine">
-                <h1>PAGE 9</h1>
-                <div>
-                    <button onClick="slide('prev')">Previous</button>
-                    <button onClick="slide('next'); location.href='part2.html'">Next</button>
-                </div>
+                <h4 style="text-align: center;">cut your cake now or listen
+                    <br>to the song until it's finished.</h1>
+                    <div>
+                        <button onClick="slide('prev')">Previous</button>
+                        <button onClick="slide('next'); location.href='part2.html'">Cut Now!</button>
+                    </div>
             </div>
         </div>
     </div>
