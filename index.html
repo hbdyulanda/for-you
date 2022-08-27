@@ -30,7 +30,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.js"></script>
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
         @import url('https://fonts.googleapis.com/css?family=Indie+Flower');
         @import url('https://fonts.googleapis.com/css?family=Amatic+SC');
 
@@ -68,7 +67,7 @@
 
         .pages {
             display: flex;
-            width: 700%;
+            width: 900%;
             box-sizing: border-box;
         }
 
@@ -111,6 +110,14 @@
         .seven {
             background-color: limegreen;
         }
+
+        .eight {
+            background-color: limegreen;
+        }
+
+        .nine {
+            background-color: limegreen;
+        }
     </style>
 </head>
 
@@ -122,18 +129,36 @@
     <div class="container">
         <div class="pages">
             <div class="page one">
+                <p>I have something for you</p>
                 <div>
-                    <button onClick="slide('next'); playAudio()">Click Me</button>
+                    <button onClick="slide('next')">Click Me</button>
                 </div>
             </div>
             <div class="page two">
-                <p>For</p>
-                <p>Yulanda Gusminar on her 20th birthday</p><br>
+                <p>It may not be very impressive,
+                    <br>but hope you like it.
+                </p>
+                <div>
+                    <button onClick="slide('next'); playAudio(); confetti()">Next</button>
+                </div>
+            </div>
+            <div class="page three">
+                <p>Happy Birthday
+                    <br>ke 20th.
+                </p>
                 <div>
                     <button onClick="slide('next')">Next</button>
                 </div>
             </div>
-            <div class="page three">
+            <div class="page four">
+                <p>For Yulanda Gusminar
+                    <br>on her 20th birthday
+                </p><br>
+                <div>
+                    <button onClick="slide('next')">Next</button>
+                </div>
+            </div>
+            <div class="page five">
                 <div>
                     <p class="poem">
                         Instead of counting candles,<br>
@@ -164,18 +189,6 @@
                     <button onClick="slide('next')">Next</button>
                 </div>
             </div>
-            <div class="page four">
-                <h1>PAGE 4</h1>
-                <div>
-                    <button onClick="slide('next')">Next</button>
-                </div>
-            </div>
-            <div class="page five">
-                <h1>PAGE 5</h1>
-                <div>
-                    <button onClick="slide('next')">Next</button>
-                </div>
-            </div>
             <div class="page six">
                 <h1>PAGE 6</h1>
                 <div>
@@ -186,251 +199,264 @@
                 <h1>PAGE 7</h1>
                 <div>
                     <button onClick="slide('prev')">Previous</button>
+                    <button onClick="slide('next')">Next</button>
+                </div>
+            </div>
+            <div class="page eight">
+                <h1>PAGE 8</h1>
+                <div>
+                    <button onClick="slide('prev')">Previous</button>
+                    <button onClick="slide('next')">Next</button>
+                </div>
+            </div>
+            <div class="page nine">
+                <h1>PAGE 9</h1>
+                <div>
+                    <button onClick="slide('prev')">Previous</button>
                     <button onClick="slide('next'); location.href='part2.html'">Next</button>
                 </div>
             </div>
         </div>
     </div>
     <script>
-        'use strict';
+        function confetti() {
+            'use strict';
 
-        // If set to true, the user must press
-        // UP UP DOWN ODWN LEFT RIGHT LEFT RIGHT A B
-        // to trigger the confetti with a random color theme.
-        // Otherwise the confetti constantly falls.
-        var onlyOnKonami = false;
 
-        $(function () {
-            // Globals
-            var $window = $(window)
-                , random = Math.random
-                , cos = Math.cos
-                , sin = Math.sin
-                , PI = Math.PI
-                , PI2 = PI * 2
-                , timer = undefined
-                , frame = undefined
-                , confetti = [];
+            var onlyOnKonami = false;
 
-            // Settings
-            var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
-                , pointer = 0;
+            $(function () {
+                // Globals
+                var $window = $(window)
+                    , random = Math.random
+                    , cos = Math.cos
+                    , sin = Math.sin
+                    , PI = Math.PI
+                    , PI2 = PI * 2
+                    , timer = undefined
+                    , frame = undefined
+                    , confetti = [];
 
-            var particles = 150
-                , spread = 40
-                , sizeMin = 3
-                , sizeMax = 12 - sizeMin
-                , eccentricity = 10
-                , deviation = 100
-                , dxThetaMin = -.1
-                , dxThetaMax = -dxThetaMin - dxThetaMin
-                , dyMin = .13
-                , dyMax = .18
-                , dThetaMin = .4
-                , dThetaMax = .7 - dThetaMin;
+                // Settings
+                var konami = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]
+                    , pointer = 0;
 
-            var colorThemes = [
-                function () {
-                    return color(200 * random() | 0, 200 * random() | 0, 200 * random() | 0);
-                }, function () {
-                    var black = 200 * random() | 0; return color(200, black, black);
-                }, function () {
-                    var black = 200 * random() | 0; return color(black, 200, black);
-                }, function () {
-                    var black = 200 * random() | 0; return color(black, black, 200);
-                }, function () {
-                    return color(200, 100, 200 * random() | 0);
-                }, function () {
-                    return color(200 * random() | 0, 200, 200);
-                }, function () {
-                    var black = 256 * random() | 0; return color(black, black, black);
-                }, function () {
-                    return colorThemes[random() < .5 ? 1 : 2]();
-                }, function () {
-                    return colorThemes[random() < .5 ? 3 : 5]();
-                }, function () {
-                    return colorThemes[random() < .5 ? 2 : 4]();
-                }
-            ];
-            function color(r, g, b) {
-                return 'rgb(' + r + ',' + g + ',' + b + ')';
-            }
+                var particles = 150
+                    , spread = 40
+                    , sizeMin = 3
+                    , sizeMax = 12 - sizeMin
+                    , eccentricity = 10
+                    , deviation = 100
+                    , dxThetaMin = -.1
+                    , dxThetaMax = -dxThetaMin - dxThetaMin
+                    , dyMin = .13
+                    , dyMax = .18
+                    , dThetaMin = .4
+                    , dThetaMax = .7 - dThetaMin;
 
-            // Cosine interpolation
-            function interpolation(a, b, t) {
-                return (1 - cos(PI * t)) / 2 * (b - a) + a;
-            }
-
-            // Create a 1D Maximal Poisson Disc over [0, 1]
-            var radius = 1 / eccentricity, radius2 = radius + radius;
-            function createPoisson() {
-                // domain is the set of points which are still available to pick from
-                // D = union{ [d_i, d_i+1] | i is even }
-                var domain = [radius, 1 - radius], measure = 1 - radius2, spline = [0, 1];
-                while (measure) {
-                    var dart = measure * random(), i, l, interval, a, b, c, d;
-
-                    // Find where dart lies
-                    for (i = 0, l = domain.length, measure = 0; i < l; i += 2) {
-                        a = domain[i], b = domain[i + 1], interval = b - a;
-                        if (dart < measure + interval) {
-                            spline.push(dart += a - measure);
-                            break;
-                        }
-                        measure += interval;
+                var colorThemes = [
+                    function () {
+                        return color(200 * random() | 0, 200 * random() | 0, 200 * random() | 0);
+                    }, function () {
+                        var black = 200 * random() | 0; return color(200, black, black);
+                    }, function () {
+                        var black = 200 * random() | 0; return color(black, 200, black);
+                    }, function () {
+                        var black = 200 * random() | 0; return color(black, black, 200);
+                    }, function () {
+                        return color(200, 100, 200 * random() | 0);
+                    }, function () {
+                        return color(200 * random() | 0, 200, 200);
+                    }, function () {
+                        var black = 256 * random() | 0; return color(black, black, black);
+                    }, function () {
+                        return colorThemes[random() < .5 ? 1 : 2]();
+                    }, function () {
+                        return colorThemes[random() < .5 ? 3 : 5]();
+                    }, function () {
+                        return colorThemes[random() < .5 ? 2 : 4]();
                     }
-                    c = dart - radius, d = dart + radius;
-
-                    // Update the domain
-                    for (i = domain.length - 1; i > 0; i -= 2) {
-                        l = i - 1, a = domain[l], b = domain[i];
-                        // c---d          c---d  Do nothing
-                        //   c-----d  c-----d    Move interior
-                        //   c--------------d    Delete interval
-                        //         c--d          Split interval
-                        //       a------b
-                        if (a >= c && a < d)
-                            if (b > d) domain[l] = d; // Move interior (Left case)
-                            else domain.splice(l, 2); // Delete interval
-                        else if (a < c && b > c)
-                            if (b <= d) domain[i] = c; // Move interior (Right case)
-                            else domain.splice(i, 0, c, d); // Split interval
-                    }
-
-                    // Re-measure the domain
-                    for (i = 0, l = domain.length, measure = 0; i < l; i += 2)
-                        measure += domain[i + 1] - domain[i];
+                ];
+                function color(r, g, b) {
+                    return 'rgb(' + r + ',' + g + ',' + b + ')';
                 }
 
-                return spline.sort();
-            }
+                // Cosine interpolation
+                function interpolation(a, b, t) {
+                    return (1 - cos(PI * t)) / 2 * (b - a) + a;
+                }
 
-            // Create the overarching container
-            var container = document.createElement('div');
-            container.style.position = 'fixed';
-            container.style.top = '0';
-            container.style.left = '0';
-            container.style.width = '100%';
-            container.style.height = '0';
-            container.style.overflow = 'visible';
-            container.style.zIndex = '9999';
+                // Create a 1D Maximal Poisson Disc over [0, 1]
+                var radius = 1 / eccentricity, radius2 = radius + radius;
+                function createPoisson() {
+                    // domain is the set of points which are still available to pick from
+                    // D = union{ [d_i, d_i+1] | i is even }
+                    var domain = [radius, 1 - radius], measure = 1 - radius2, spline = [0, 1];
+                    while (measure) {
+                        var dart = measure * random(), i, l, interval, a, b, c, d;
 
-            // Confetto constructor
-            function Confetto(theme) {
-                this.frame = 0;
-                this.outer = document.createElement('div');
-                this.inner = document.createElement('div');
-                this.outer.appendChild(this.inner);
-
-                var outerStyle = this.outer.style, innerStyle = this.inner.style;
-                outerStyle.position = 'absolute';
-                outerStyle.width = (sizeMin + sizeMax * random()) + 'px';
-                outerStyle.height = (sizeMin + sizeMax * random()) + 'px';
-                innerStyle.width = '100%';
-                innerStyle.height = '100%';
-                innerStyle.backgroundColor = theme();
-
-                outerStyle.perspective = '50px';
-                outerStyle.transform = 'rotate(' + (360 * random()) + 'deg)';
-                this.axis = 'rotate3D(' +
-                    cos(360 * random()) + ',' +
-                    cos(360 * random()) + ',0,';
-                this.theta = 360 * random();
-                this.dTheta = dThetaMin + dThetaMax * random();
-                innerStyle.transform = this.axis + this.theta + 'deg)';
-
-                this.x = $window.width() * random();
-                this.y = -deviation;
-                this.dx = sin(dxThetaMin + dxThetaMax * random());
-                this.dy = dyMin + dyMax * random();
-                outerStyle.left = this.x + 'px';
-                outerStyle.top = this.y + 'px';
-
-                // Create the periodic spline
-                this.splineX = createPoisson();
-                this.splineY = [];
-                for (var i = 1, l = this.splineX.length - 1; i < l; ++i)
-                    this.splineY[i] = deviation * random();
-                this.splineY[0] = this.splineY[l] = deviation * random();
-
-                this.update = function (height, delta) {
-                    this.frame += delta;
-                    this.x += this.dx * delta;
-                    this.y += this.dy * delta;
-                    this.theta += this.dTheta * delta;
-
-                    // Compute spline and convert to polar
-                    var phi = this.frame % 7777 / 7777, i = 0, j = 1;
-                    while (phi >= this.splineX[j]) i = j++;
-                    var rho = interpolation(
-                        this.splineY[i],
-                        this.splineY[j],
-                        (phi - this.splineX[i]) / (this.splineX[j] - this.splineX[i])
-                    );
-                    phi *= PI2;
-
-                    outerStyle.left = this.x + rho * cos(phi) + 'px';
-                    outerStyle.top = this.y + rho * sin(phi) + 'px';
-                    innerStyle.transform = this.axis + this.theta + 'deg)';
-                    return this.y > height + deviation;
-                };
-            }
-
-            function poof() {
-                if (!frame) {
-                    // Append the container
-                    document.body.appendChild(container);
-
-                    // Add confetti
-                    var theme = colorThemes[onlyOnKonami ? colorThemes.length * random() | 0 : 0]
-                        , count = 0;
-                    (function addConfetto() {
-                        if (onlyOnKonami && ++count > particles)
-                            return timer = undefined;
-
-                        var confetto = new Confetto(theme);
-                        confetti.push(confetto);
-                        container.appendChild(confetto.outer);
-                        timer = setTimeout(addConfetto, spread * random());
-                    })(0);
-
-                    // Start the loop
-                    var prev = undefined;
-                    requestAnimationFrame(function loop(timestamp) {
-                        var delta = prev ? timestamp - prev : 0;
-                        prev = timestamp;
-                        var height = $window.height();
-
-                        for (var i = confetti.length - 1; i >= 0; --i) {
-                            if (confetti[i].update(height, delta)) {
-                                container.removeChild(confetti[i].outer);
-                                confetti.splice(i, 1);
+                        // Find where dart lies
+                        for (i = 0, l = domain.length, measure = 0; i < l; i += 2) {
+                            a = domain[i], b = domain[i + 1], interval = b - a;
+                            if (dart < measure + interval) {
+                                spline.push(dart += a - measure);
+                                break;
                             }
+                            measure += interval;
+                        }
+                        c = dart - radius, d = dart + radius;
+
+                        // Update the domain
+                        for (i = domain.length - 1; i > 0; i -= 2) {
+                            l = i - 1, a = domain[l], b = domain[i];
+                            // c---d          c---d  Do nothing
+                            //   c-----d  c-----d    Move interior
+                            //   c--------------d    Delete interval
+                            //         c--d          Split interval
+                            //       a------b
+                            if (a >= c && a < d)
+                                if (b > d) domain[l] = d; // Move interior (Left case)
+                                else domain.splice(l, 2); // Delete interval
+                            else if (a < c && b > c)
+                                if (b <= d) domain[i] = c; // Move interior (Right case)
+                                else domain.splice(i, 0, c, d); // Split interval
                         }
 
-                        if (timer || confetti.length)
-                            return frame = requestAnimationFrame(loop);
+                        // Re-measure the domain
+                        for (i = 0, l = domain.length, measure = 0; i < l; i += 2)
+                            measure += domain[i + 1] - domain[i];
+                    }
 
-                        // Cleanup
-                        document.body.removeChild(container);
-                        frame = undefined;
-                    });
+                    return spline.sort();
                 }
-            }
 
-            $window.keydown(function (event) {
-                pointer = konami[pointer] === event.which
-                    ? pointer + 1
-                    : +(event.which === konami[0]);
-                if (pointer === konami.length) {
-                    pointer = 0;
-                    poof();
+                // Create the overarching container
+                var container = document.createElement('div');
+                container.style.position = 'fixed';
+                container.style.top = '0';
+                container.style.left = '0';
+                container.style.width = '100%';
+                container.style.height = '0';
+                container.style.overflow = 'visible';
+                container.style.zIndex = '9999';
+
+                // Confetto constructor
+                function Confetto(theme) {
+                    this.frame = 0;
+                    this.outer = document.createElement('div');
+                    this.inner = document.createElement('div');
+                    this.outer.appendChild(this.inner);
+
+                    var outerStyle = this.outer.style, innerStyle = this.inner.style;
+                    outerStyle.position = 'absolute';
+                    outerStyle.width = (sizeMin + sizeMax * random()) + 'px';
+                    outerStyle.height = (sizeMin + sizeMax * random()) + 'px';
+                    innerStyle.width = '100%';
+                    innerStyle.height = '100%';
+                    innerStyle.backgroundColor = theme();
+
+                    outerStyle.perspective = '50px';
+                    outerStyle.transform = 'rotate(' + (360 * random()) + 'deg)';
+                    this.axis = 'rotate3D(' +
+                        cos(360 * random()) + ',' +
+                        cos(360 * random()) + ',0,';
+                    this.theta = 360 * random();
+                    this.dTheta = dThetaMin + dThetaMax * random();
+                    innerStyle.transform = this.axis + this.theta + 'deg)';
+
+                    this.x = $window.width() * random();
+                    this.y = -deviation;
+                    this.dx = sin(dxThetaMin + dxThetaMax * random());
+                    this.dy = dyMin + dyMax * random();
+                    outerStyle.left = this.x + 'px';
+                    outerStyle.top = this.y + 'px';
+
+                    // Create the periodic spline
+                    this.splineX = createPoisson();
+                    this.splineY = [];
+                    for (var i = 1, l = this.splineX.length - 1; i < l; ++i)
+                        this.splineY[i] = deviation * random();
+                    this.splineY[0] = this.splineY[l] = deviation * random();
+
+                    this.update = function (height, delta) {
+                        this.frame += delta;
+                        this.x += this.dx * delta;
+                        this.y += this.dy * delta;
+                        this.theta += this.dTheta * delta;
+
+                        // Compute spline and convert to polar
+                        var phi = this.frame % 7777 / 7777, i = 0, j = 1;
+                        while (phi >= this.splineX[j]) i = j++;
+                        var rho = interpolation(
+                            this.splineY[i],
+                            this.splineY[j],
+                            (phi - this.splineX[i]) / (this.splineX[j] - this.splineX[i])
+                        );
+                        phi *= PI2;
+
+                        outerStyle.left = this.x + rho * cos(phi) + 'px';
+                        outerStyle.top = this.y + rho * sin(phi) + 'px';
+                        innerStyle.transform = this.axis + this.theta + 'deg)';
+                        return this.y > height + deviation;
+                    };
                 }
+
+                function poof() {
+                    if (!frame) {
+                        // Append the container
+                        document.body.appendChild(container);
+
+                        // Add confetti
+                        var theme = colorThemes[onlyOnKonami ? colorThemes.length * random() | 0 : 0]
+                            , count = 0;
+                        (function addConfetto() {
+                            if (onlyOnKonami && ++count > particles)
+                                return timer = undefined;
+
+                            var confetto = new Confetto(theme);
+                            confetti.push(confetto);
+                            container.appendChild(confetto.outer);
+                            timer = setTimeout(addConfetto, spread * random());
+                        })(0);
+
+                        // Start the loop
+                        var prev = undefined;
+                        requestAnimationFrame(function loop(timestamp) {
+                            var delta = prev ? timestamp - prev : 0;
+                            prev = timestamp;
+                            var height = $window.height();
+
+                            for (var i = confetti.length - 1; i >= 0; --i) {
+                                if (confetti[i].update(height, delta)) {
+                                    container.removeChild(confetti[i].outer);
+                                    confetti.splice(i, 1);
+                                }
+                            }
+
+                            if (timer || confetti.length)
+                                return frame = requestAnimationFrame(loop);
+
+                            // Cleanup
+                            document.body.removeChild(container);
+                            frame = undefined;
+                        });
+                    }
+                }
+
+                $window.keydown(function (event) {
+                    pointer = konami[pointer] === event.which
+                        ? pointer + 1
+                        : +(event.which === konami[0]);
+                    if (pointer === konami.length) {
+                        pointer = 0;
+                        poof();
+                    }
+                });
+
+                if (!onlyOnKonami) poof();
             });
 
-            if (!onlyOnKonami) poof();
-        });
-
+        }
     </script>
     <script>var x = document.getElementById("myAudio");
 
