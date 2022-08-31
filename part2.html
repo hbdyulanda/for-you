@@ -454,6 +454,10 @@
 </head>
 
 <body>
+    <audio id="myAudio">
+        <source src="assets/audio/foryou2.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
     <div class="wrapper">
         <div class="text">
             <h1>Happy<br><br>Birthday</h1>
@@ -471,7 +475,7 @@
                 <div class="ballon"></div>
                 <div class="ballon"></div>
             </div>
-            <div class="bdayCake">
+            <div onClick="playAudio()" class="bdayCake">
                 <div class="plate"></div>
                 <div class="cream"></div>
                 <div class="candle"></div>
@@ -483,6 +487,16 @@
             </div>
         </div>
     </div>
+    <script>
+        var x = document.getElementById("myAudio");
+
+        function playAudio() {
+            x.play();
+        }
+    </script>
+    <script>
+        alert("Click the cake!");
+    </script>
 </body>
 
 </html>
