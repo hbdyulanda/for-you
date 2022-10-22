@@ -2782,6 +2782,10 @@ div {
     </style>
 </head>
 <body>
+  <audio id="myAudio">
+    <source src="assets/audio/foryou2.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
     
 <input class="button" type="checkbox" id="piece0"/>
 <label class="label" for="piece0"></label>
@@ -2808,7 +2812,7 @@ div {
 <input class="button" type="checkbox" id="piece11"/>
 <label class="label" for="piece11"></label>
 <div class="click">Click!</div>
-<div class="reload">One more?<br/>Please reload!</div>
+<div class="reload">meet ulang tahun?<br/>hehe</div>
 <div class="container">
   <div class="trigger"></div>
   <div class="trigger"></div>
@@ -3329,5 +3333,15 @@ div {
     </div>
   </div>
 </div>
+<script>
+  var x = document.getElementById("myAudio");
+
+  function playAudio() {
+      x.play();
+  }
+</script>
+<script>
+  alert("HBD Yulanda!");
+</script>
 </body>
 </html>
